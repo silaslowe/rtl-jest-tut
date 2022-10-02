@@ -1,48 +1,39 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import FollowersList from "../FollowersList";
+import { render, screen, fireEvent } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
+import FollowersList from '../FollowersList'
 
 const MockFollowersList = () => {
-    return (
-        <BrowserRouter>
-            <FollowersList />
-        </BrowserRouter>
-    )
+  return (
+    <BrowserRouter>
+      <FollowersList />
+    </BrowserRouter>
+  )
 }
 
-describe("FollowersList", () => {
+describe('FollowersList', () => {
 
     beforeEach(() => {
-        // console.log("RUNS BEFORE EACH TEST")
-        jest.mock("../../../__mocks__/axios")
+        console.log("Running")
     })
 
-    // beforeAll(() => {
-    //     console.log("RUNS ONCE BEFORE ALL TESTS")
-    // })
+    beforeAll(() => {
+        console.log("All")
+    })
 
-    // afterEach(() => {
-    //     console.log("RUNS AFTER EACH TEST")
-    // })
+    afterEach(() => {
+        console.log("After")
+    })
 
-    // afterAll(() => {
-    //     console.log("RUNS ONCE AFTER ALL TESTS")
-    // })
+  it('FollowList renders', async () => {
+    render(<MockFollowersList />)
+    const followerDivElement = await screen.findByTestId('follower-item-0')
+    screen.debug()
+    expect(followerDivElement).toBeInTheDocument()
+  })
 
-    it('should fetch and render input element', async () => {
-        render(
-            <MockFollowersList />
-        );
-        const followerDivElement = await screen.findByTestId(`follower-item-0`)
-        expect(followerDivElement).toBeInTheDocument();
-    });
-    
-    it('should fetch and render input element', async () => {
-        render(
-            <MockFollowersList />
-        );
-    
-        const followerDivElement = await screen.findByTestId(`follower-item-0`)
-        expect(followerDivElement).toBeInTheDocument();
-    });
+//   it('FollowList all renders', async () => {
+//     render(<MockFollowersList />)
+//     const followerDivElements = await screen.findAllByTestId(/follower-item/i)
+//     expect(followerDivElements.length).toBe(5)
+//   })
 })
